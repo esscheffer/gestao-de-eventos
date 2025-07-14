@@ -25,4 +25,8 @@ public class EventsService {
                 .map(eventMapper::toDto)
                 .orElseThrow(() -> new EventNotFoundException(id));
     }
+
+    public EventDTO createEvent(EventDTO eventDTO) {
+        return eventMapper.toDto(eventRepository.save(eventMapper.toEntity(eventDTO)));
+    }
 }
