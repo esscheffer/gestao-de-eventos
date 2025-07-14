@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,10 @@ public class EventsController {
     public ResponseEntity<Page<EventDTO>> getAllEvents(@RequestParam int page,
                                                        @RequestParam int size) {
         return ResponseEntity.ok(eventService.getAllEvents(page, size));
+    }
+
+    @GetMapping("/api/events/{id}")
+    public ResponseEntity<EventDTO> getEventById(@PathVariable Long id) {
+        return ResponseEntity.ok(eventService.getEventById(id));
     }
 }

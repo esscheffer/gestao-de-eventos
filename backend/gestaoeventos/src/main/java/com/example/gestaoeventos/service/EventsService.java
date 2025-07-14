@@ -1,6 +1,7 @@
 package com.example.gestaoeventos.service;
 
 import com.example.gestaoeventos.dto.EventDTO;
+import com.example.gestaoeventos.exception.EventNotFoundException;
 import com.example.gestaoeventos.mapper.EventMapper;
 import com.example.gestaoeventos.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +18,11 @@ public class EventsService {
 
     public Page<EventDTO> getAllEvents(int page, int size) {
         return eventRepository.findAll(PageRequest.of(page, size)).map(eventMapper::toDto);
+    }
+
+    public EventDTO getEventById(Long id) {
+        return eventRepository.findById(id)
+                .map(eventMapper::toDto)
+                .orElseThrow(() -> new EventNotFoundException(id));
     }
 }
