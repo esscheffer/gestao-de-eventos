@@ -1,0 +1,21 @@
+package com.example.gestaoeventos.service;
+
+import com.example.gestaoeventos.dto.EventDTO;
+import com.example.gestaoeventos.mapper.EventMapper;
+import com.example.gestaoeventos.repository.EventRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class EventsService {
+
+    private final EventRepository eventRepository;
+    private final EventMapper eventMapper;
+
+    public Page<EventDTO> getAllEvents(int page, int size) {
+        return eventRepository.findAll(PageRequest.of(page, size)).map(eventMapper::toDto);
+    }
+}
