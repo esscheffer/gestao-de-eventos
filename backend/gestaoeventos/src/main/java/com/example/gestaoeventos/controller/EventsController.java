@@ -29,4 +29,10 @@ public class EventsController {
     public ResponseEntity<EventDTO> createEvent(@Valid @RequestBody EventDTO eventDTO) {
         return ResponseEntity.ok(eventService.createEvent(eventDTO));
     }
+
+    @PutMapping("/api/events/{id}")
+    public ResponseEntity<EventDTO> createEvent(@PathVariable Long id,
+                                                @Valid @RequestBody EventDTO eventDTO) {
+        return ResponseEntity.ok(eventService.updateEvent(id, eventDTO));
+    }
 }

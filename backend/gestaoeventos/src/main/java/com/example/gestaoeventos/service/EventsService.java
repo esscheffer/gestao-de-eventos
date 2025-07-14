@@ -4,6 +4,7 @@ import com.example.gestaoeventos.dto.EventDTO;
 import com.example.gestaoeventos.exception.EventNotFoundException;
 import com.example.gestaoeventos.mapper.EventMapper;
 import com.example.gestaoeventos.repository.EventRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,5 +29,14 @@ public class EventsService {
 
     public EventDTO createEvent(EventDTO eventDTO) {
         return eventMapper.toDto(eventRepository.save(eventMapper.toEntity(eventDTO)));
+    }
+
+    public EventDTO updateEvent(Long id, @Valid EventDTO eventDTO) {
+        return eventRepository.findById(id)
+                .map(event -> {
+                    eventMapper.updateEventFromDto(eventDTO, event);
+                    return eventMapper.toDto(eventRepository.save(event));
+                })
+                .orElseThrow(() -> new EventNotFoundException(id));
     }
 }
