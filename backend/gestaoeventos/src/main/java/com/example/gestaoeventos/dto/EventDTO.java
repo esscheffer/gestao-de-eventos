@@ -17,23 +17,23 @@ import java.time.ZonedDateTime;
 @Builder
 public class EventDTO {
 
-    @JsonProperty("ID")
+    @JsonProperty("id")
     private Long id;
 
     @Size(max = 100, message = "Tamanho máximo do título de 100 caracteres excedido")
     @NotBlank(message = "Título é obrigatório")
-    @JsonProperty("Título")
+    @JsonProperty("titulo")
     private String title;
 
     @Size(max = 1000, message = "Tamanho máximo da descrição de 1000 caracteres excedido")
-    @JsonProperty("Descrição")
+    @JsonProperty("descricao")
     private String description;
 
     @NotNull(message = "Data e Hora é obrigatório")
-    @JsonProperty("Data e Hora")
+    @JsonProperty("dataHora")
     private ZonedDateTime dateTime;
 
     @Size(max = 200, message = "Tamanho máximo do local de 200 caracteres excedido")
-    @JsonProperty("Local")
+    @JsonProperty("local")
     private String location;
 }

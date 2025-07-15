@@ -43,9 +43,9 @@ public class EventsControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(eventDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.Título").value("Test Event"))
-                .andExpect(jsonPath("$.Descrição").value("Test description"))
-                .andExpect(jsonPath("$.Local").value("Test Location"))
+                .andExpect(jsonPath("$.titulo").value("Test Event"))
+                .andExpect(jsonPath("$.descricao").value("Test description"))
+                .andExpect(jsonPath("$.local").value("Test Location"))
                 .andReturn();
 
         // Verify the event was created
@@ -56,10 +56,10 @@ public class EventsControllerTest {
         mockMvc.perform(get("/api/events/" + createdEvent.getId())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.ID").value(createdEvent.getId()))
-                .andExpect(jsonPath("$.Título").value("Test Event"))
-                .andExpect(jsonPath("$.Descrição").value("Test description"))
-                .andExpect(jsonPath("$.Local").value("Test Location"))
+                .andExpect(jsonPath("$.id").value(createdEvent.getId()))
+                .andExpect(jsonPath("$.titulo").value("Test Event"))
+                .andExpect(jsonPath("$.descricao").value("Test description"))
+                .andExpect(jsonPath("$.local").value("Test Location"))
                 .andReturn();
     }
 }
