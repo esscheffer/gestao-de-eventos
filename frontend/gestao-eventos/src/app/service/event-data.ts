@@ -6,16 +6,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EventDataService {
-  private apiUrl = 'http://backend:8080/api/events?page=0&size=100';
-  private byIdUrl = 'http://backend:8080/api/events/';
+  private apiUrl = 'http://localhost:8080/api/events';
 
   constructor(private http: HttpClient) { }
 
   getEvents(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl + "?page=0&size=100");
   }
 
   getEventById(id: string): Observable<any> {
-    return this.http.get(`${this.byIdUrl}${id}`);
+    return this.http.get(`${this.apiUrl}${id}`);
+  }
+
+  createEvent(event: any): Observable<any> {
+    return this.http.post(this.apiUrl, event);
   }
 }
