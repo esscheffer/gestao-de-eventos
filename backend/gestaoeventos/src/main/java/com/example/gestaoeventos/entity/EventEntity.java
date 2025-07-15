@@ -2,6 +2,8 @@ package com.example.gestaoeventos.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.ZonedDateTime;
 
@@ -11,6 +13,8 @@ import java.time.ZonedDateTime;
 @Getter
 @Setter
 @Builder
+@SQLDelete(sql = "UPDATE events SET deleted = true WHERE id = ?")
+@SQLRestriction(value = "deleted = false")
 public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +27,6 @@ public class EventEntity {
     private ZonedDateTime dateTime;
 
     private String location;
+
+    private boolean deleted = false;
 }

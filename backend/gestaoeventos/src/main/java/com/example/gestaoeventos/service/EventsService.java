@@ -39,4 +39,8 @@ public class EventsService {
                 })
                 .orElseThrow(() -> new EventNotFoundException(id));
     }
+
+    public void deleteEvent(Long id) {
+        eventRepository.deleteById(id);
+    }
 }
