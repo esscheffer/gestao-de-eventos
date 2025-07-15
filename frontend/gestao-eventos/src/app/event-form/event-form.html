@@ -1,0 +1,38 @@
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Título</mat-label>
+    <input matInput formControlName="titulo">
+    @if (eventForm.get('titulo')?.invalid) {
+    <mat-error >Título é obrigatório</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Descrição</mat-label>
+    <textarea matInput formControlName="descricao"></textarea>
+    @if (eventForm.get('descricao')?.invalid) {
+    <mat-error>Descrição é obrigatória</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Data e Hora</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dataHora">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    @if (eventForm.get('dataHora')?.invalid) {
+    <mat-error>Data e Hora são obrigatórias</mat-error>
+
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Local</mat-label>
+    <input matInput formControlName="local">
+    @if (eventForm.get('local')?.invalid) {
+    <mat-error>Local é obrigatório</mat-error>
+    }
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Salvar</button>
+</form>
