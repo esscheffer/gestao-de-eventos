@@ -28,5 +28,6 @@ public class EventEntity {
 
     private String location;
 
+    @Builder.Default
     private boolean deleted = false;
 }
